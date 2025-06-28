@@ -25,11 +25,15 @@ export function Sidebar({ children }: SidebarProps) {
       {/* Mobile menu button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-white dark:bg-gray-800 shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-3 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-200"
         color="gray"
         size="sm"
       >
-        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        {isOpen ? (
+          <X className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+        ) : (
+          <Menu className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+        )}
       </Button>
 
       {/* Sidebar */}

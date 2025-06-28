@@ -18,7 +18,7 @@ export function ThemeToggle() {
         color="gray"
         size="sm"
       >
-        <Sun className="h-4 w-4" />
+        <Sun className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />
       </Button>
       <Button
         onClick={() => setTheme("dark")}
@@ -29,7 +29,7 @@ export function ThemeToggle() {
         color="gray"
         size="sm"
       >
-        <Moon className="h-4 w-4" />
+        <Moon className="h-4 w-4 text-blue-600 dark:text-blue-400" />
       </Button>
       <Button
         onClick={() => setTheme("system")}
@@ -40,7 +40,7 @@ export function ThemeToggle() {
         color="gray"
         size="sm"
       >
-        <Monitor className="h-4 w-4" />
+        <Monitor className="h-4 w-4 text-gray-600 dark:text-gray-400" />
       </Button>
     </div>
   )
