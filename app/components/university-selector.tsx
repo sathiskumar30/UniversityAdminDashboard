@@ -54,6 +54,8 @@ export function UniversitySelector({ universities, selectedUniversity, onUnivers
     }
   }, [isOpen])
 
+  console.log(selectedUniversity,'SelectedUniversity da Sathis uh')
+
   return (
     <div className="relative w-full max-w-2xl mx-auto">
       {/* Selector Button */}

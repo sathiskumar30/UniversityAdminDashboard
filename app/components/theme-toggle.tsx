@@ -31,17 +31,7 @@ export function ThemeToggle() {
       >
         <Moon className="h-4 w-4 text-blue-600 dark:text-blue-400" />
       </Button>
-      <Button
-        onClick={() => setTheme("system")}
-        className={`p-2 rounded-md transition-colors ${
-          theme === "system" ? "bg-white dark:bg-gray-700 shadow-sm" : "hover:bg-gray-200 dark:hover:bg-gray-700"
-        }`}
-        title="System theme"
-        color="gray"
-        size="sm"
-      >
-        <Monitor className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-      </Button>
+
     </div>
   )
 }

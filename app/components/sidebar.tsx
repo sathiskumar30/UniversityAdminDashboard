@@ -15,9 +15,9 @@ export function Sidebar({ children }: SidebarProps) {
 
   const menuItems = [
     { icon: BarChart3, label: "Dashboard", href: "/", active: true },
-    { icon: GraduationCap, label: "University Profile", href: "/profile" },
-    { icon: Users, label: "Rankings", href: "/rankings" },
-    { icon: Settings, label: "Settings", href: "/settings" },
+    // { icon: GraduationCap, label: "University Profile", href: "/profile" , active: false},
+    // { icon: Users, label: "Rankings", href: "/rankings" },
+    // { icon: Settings, label: "Settings", href: "/settings" },
   ]
 
   return (
@@ -51,7 +51,7 @@ export function Sidebar({ children }: SidebarProps) {
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <GraduationCap className="h-5 w-5 text-white" />
               </div>
-              <span className="text-lg font-bold text-gray-900 dark:text-white">UdeM Admin</span>
+              <span className="text-lg font-bold text-gray-900 dark:text-white">Admin Panel</span>
             </div>
           </div>
 
@@ -90,7 +90,7 @@ export function Sidebar({ children }: SidebarProps) {
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         {/* Header */}
         <Navbar className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center justify-between h-16 px-6 w-full">
+          <div className="flex items-center justify-between h-11 px-6 w-full">
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-semibold text-gray-900 dark:text-white ml-12 lg:ml-0">Dashboard</h1>
             </div>

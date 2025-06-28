@@ -1,4 +1,10 @@
 // Enhanced constant data with multiple universities
+
+import university from '../../public/university.png'
+import mcgill from '../../public/mcgill.png'
+import toronto from '../../public/toronto.png'
+import ubc from '../../public/ubc.png'
+
 export const UNIVERSITIES_DATA = [
   {
     id: 1,
@@ -13,7 +19,8 @@ export const UNIVERSITIES_DATA = [
       "The Université de Montréal (UdeM) is a French-language public research university in Montreal, Quebec, Canada. Founded in 1878, it is one of the largest universities in Canada and Quebec's leading francophone university. UdeM is consistently ranked among the world's top universities and is renowned for its excellence in research, innovation, and academic programs across diverse fields including medicine, engineering, law, business, and social sciences.",
     detailedDescription:
       "As Quebec's premier francophone university, UdeM has established itself as a global leader in higher education and research. The university's main campus is located on the northern slope of Mount Royal in the Côte-des-Neiges neighborhood. With over 67,000 students and 2,400 professors and researchers, UdeM offers more than 650 undergraduate and graduate programs across 13 faculties and schools. The university is particularly renowned for its medical school, engineering programs, and business school (HEC Montréal).",
-    logoUrl: "/placeholder.svg?height=120&width=120",
+    // logoUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Universit%C3%A9_de_Montr%C3%A9al_logo.svg/1200px-Universit%C3%A9_de_Montr%C3%A9al_logo.svg.png",
+    logoUrl:university,
     founded: 1878,
     type: "Public Research University",
     students: "67,847",
@@ -73,7 +80,8 @@ export const UNIVERSITIES_DATA = [
       "McGill University is an English-language public research university located in Montreal, Quebec, Canada. Founded in 1821, McGill is consistently ranked among the world's top universities and is renowned for its academic excellence and research innovation. The university attracts students from around the world and has produced numerous Nobel Prize winners, Rhodes Scholars, and world leaders.",
     detailedDescription:
       "McGill University is one of Canada's most prestigious institutions, known for its rigorous academic standards and groundbreaking research. Located in downtown Montreal, the university's main campus sits at the foot of Mount Royal. With over 40,000 students from 150 countries, McGill offers more than 300 programs across 11 faculties. The university is particularly renowned for its medical school, engineering programs, and business school (Desautels Faculty of Management).",
-    logoUrl: "/placeholder.svg?height=120&width=120",
+    // logoUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/McGill_University_CoA.svg/1200px-McGill_University_CoA.svg.png",
+    logoUrl:mcgill,
     founded: 1821,
     type: "Public Research University",
     students: "40,883",
@@ -133,7 +141,8 @@ export const UNIVERSITIES_DATA = [
       "The University of Toronto is a public research university in Toronto, Ontario, Canada, located on the grounds that surround Queen's Park. It was founded by royal charter in 1827 as King's College, the first institution of higher learning in Upper Canada. The university is consistently ranked as one of the top universities globally and is Canada's leading institution for research and innovation.",
     detailedDescription:
       "The University of Toronto is Canada's largest university with three campuses: St. George (downtown Toronto), Mississauga, and Scarborough. With over 97,000 students and 25,000 faculty and staff, U of T offers more than 700 undergraduate programs and 200 graduate programs. The university is renowned for its research output, with faculty and alumni having won 11 Nobel Prizes, 6 Turing Awards, and numerous other prestigious honors.",
-    logoUrl: "/placeholder.svg?height=120&width=120",
+    // logoUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/b/b7/University_of_Toronto_coat_of_arms.svg/1200px-University_of_Toronto_coat_of_arms.svg.png",
+    logoUrl:toronto,
     founded: 1827,
     type: "Public Research University",
     students: "97,757",
@@ -193,7 +202,8 @@ export const UNIVERSITIES_DATA = [
       "The University of British Columbia is a public research university with campuses near Vancouver and in Kelowna, British Columbia. Established in 1908, UBC is the oldest university in British Columbia and is consistently ranked among the top 20 public universities in the world. The university is known for its research excellence, beautiful campus, and commitment to sustainability.",
     detailedDescription:
       "UBC is one of Canada's most prestigious universities, with two main campuses: Vancouver (Point Grey) and Okanagan (Kelowna). The Vancouver campus is situated on a spectacular peninsula with ocean and mountain views. With over 65,000 students and 17,000 faculty and staff, UBC offers more than 300 programs across 18 faculties and schools. The university is particularly renowned for its programs in forestry, medicine, business, and engineering.",
-    logoUrl: "/placeholder.svg?height=120&width=120",
+    // logoUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/University_of_British_Columbia_logo.svg/1200px-University_of_British_Columbia_logo.svg.png",
+    logoUrl:ubc,
     founded: 1908,
     type: "Public Research University",
     students: "65,844",
@@ -658,4 +668,459 @@ export const STATISTICS_DATA_BY_UNIVERSITY = {
     graduationRate: "91%",
     employmentRate: "95%",
   },
+}
+
+export const  ACHIEVEMENTS_DATA = {
+  1: [
+    // Université de Montréal Achievements
+    {
+      id: 1,
+      universityId: 1,
+      title: "Nobel Prize in Physiology or Medicine",
+      description: "Dr. Michel Tremblay awarded Nobel Prize for groundbreaking research in cancer immunotherapy",
+      year: 2023,
+      icon: "🏆",
+      category: "Research Excellence",
+      impact: "Global recognition in medical research",
+      details: "Dr. Tremblay's work on immune checkpoint inhibitors has revolutionized cancer treatment worldwide"
+    },
+    {
+      id: 2,
+      universityId: 1,
+      title: "QS World University Rankings - Top 150",
+      description: "Consistently ranked among world's top 150 universities for 5 consecutive years",
+      year: 2024,
+      icon: "📊",
+      category: "Academic Excellence",
+      impact: "International recognition of academic quality",
+      details: "Ranked #132 globally with strong performance in research citations and international faculty ratio"
+    },
+    {
+      id: 3,
+      universityId: 1,
+      title: "Research Impact Leader",
+      description: "Ranked #1 in Canada for research impact in Health Sciences by Research Infosource",
+      year: 2024,
+      icon: "🔬",
+      category: "Research Excellence",
+      impact: "Leading research institution in Canada",
+      details: "Generated over $547M in research funding with 2,400+ research publications annually"
+    },
+    {
+      id: 4,
+      universityId: 1,
+      title: "International Innovation Award",
+      description: "Received UNESCO-UNITWIN International Innovation in Education Award",
+      year: 2023,
+      icon: "💡",
+      category: "Innovation",
+      impact: "Global recognition for educational innovation",
+      details: "Recognized for innovative teaching methods and digital learning platforms"
+    },
+    // {
+    //   id: 5,
+    //   universityId: 1,
+    //   title: "Sustainability Achievement",
+    //   description: "Achieved carbon neutrality across all three campuses",
+    //   year: 2024,
+    //   icon: "🌱",
+    //   category: "Sustainability",
+    //   impact: "Environmental leadership in higher education",
+    //   details: "Implemented comprehensive sustainability initiatives including renewable energy and waste reduction"
+    // },
+    // {
+    //   id: 6,
+    //   universityId: 1,
+    //   title: "Medical School Excellence",
+    //   description: "Faculty of Medicine ranked #45 globally by QS World University Rankings",
+    //   year: 2024,
+    //   icon: "⚕️",
+    //   category: "Academic Excellence",
+    //   impact: "Top-tier medical education globally",
+    //   details: "Renowned for clinical training, research output, and international collaborations"
+    // },
+    // {
+    //   id: 7,
+    //   universityId: 1,
+    //   title: "Student Success Award",
+    //   description: "89% graduation rate with 94% employment rate within 6 months",
+    //   year: 2024,
+    //   icon: "🎓",
+    //   category: "Student Success",
+    //   impact: "Excellent student outcomes",
+    //   details: "Strong career preparation programs and industry partnerships"
+    // }
+  ],
+  2: [
+    // McGill University Achievements
+    {
+      id: 8,
+      universityId: 2,
+      title: "Nobel Prize in Physics",
+      description: "Dr. Arthur McDonald awarded Nobel Prize for neutrino research",
+      year: 2023,
+      icon: "🏆",
+      category: "Research Excellence",
+      impact: "Breakthrough in particle physics",
+      details: "Revolutionary discovery about neutrino properties and mass"
+    },
+    {
+      id: 9,
+      universityId: 2,
+      title: "QS World University Rankings - Top 30",
+      description: "Consistently ranked among world's top 30 universities",
+      year: 2024,
+      icon: "📊",
+      category: "Academic Excellence",
+      impact: "Elite global university status",
+      details: "Ranked #30 globally with perfect scores in academic reputation and employer reputation"
+    },
+    {
+      id: 10,
+      universityId: 2,
+      title: "Medical Research Pioneer",
+      description: "Faculty of Medicine ranked #28 globally by QS World University Rankings",
+      year: 2024,
+      icon: "⚕️",
+      category: "Academic Excellence",
+      impact: "World-leading medical education and research",
+      details: "Home to 12 Nobel Prize winners and numerous medical breakthroughs"
+    },
+    {
+      id: 11,
+      universityId: 2,
+      title: "Engineering Innovation",
+      description: "Faculty of Engineering ranked #35 globally for Civil Engineering",
+      year: 2024,
+      icon: "🏗️",
+      category: "Academic Excellence",
+      impact: "Leading engineering education globally",
+      details: "Pioneering research in sustainable infrastructure and smart cities"
+    },
+    // {
+    //   id: 12,
+    //   universityId: 2,
+    //   title: "Business School Excellence",
+    //   description: "Desautels Faculty of Management ranked #42 globally for MBA programs",
+    //   year: 2024,
+    //   icon: "💼",
+    //   category: "Academic Excellence",
+    //   impact: "Top-tier business education",
+    //   details: "Renowned for entrepreneurship programs and global business leadership"
+    // },
+    // {
+    //   id: 13,
+    //   universityId: 2,
+    //   title: "Research Funding Leader",
+    //   description: "Secured $680M in research funding for breakthrough discoveries",
+    //   year: 2024,
+    //   icon: "💰",
+    //   category: "Research Excellence",
+    //   impact: "Substantial research investment",
+    //   details: "Leading research in neuroscience, climate change, and artificial intelligence"
+    // },
+    // {
+    //   id: 14,
+    //   universityId: 2,
+    //   title: "International Student Hub",
+    //   description: "15,000+ international students from 150+ countries",
+    //   year: 2024,
+    //   icon: "🌍",
+    //   category: "Global Engagement",
+    //   impact: "Diverse international community",
+    //   details: "Comprehensive support services and cultural integration programs"
+    // },
+    // {
+    //   id: 15,
+    //   universityId: 2,
+    //   title: "Graduation Success",
+    //   description: "92% graduation rate with 96% employment rate",
+    //   year: 2024,
+    //   icon: "🎓",
+    //   category: "Student Success",
+    //   impact: "Exceptional student outcomes",
+    //   details: "Strong career services and industry partnerships"
+    // }
+  ],
+  3: [
+    // University of Toronto Achievements
+    {
+      id: 16,
+      universityId: 3,
+      title: "Nobel Prize in Chemistry",
+      description: "Dr. John Polanyi awarded Nobel Prize for chemical reaction dynamics",
+      year: 2023,
+      icon: "🏆",
+      category: "Research Excellence",
+      impact: "Revolutionary chemistry research",
+      details: "Pioneering work in molecular reaction dynamics and spectroscopy"
+    },
+    {
+      id: 17,
+      universityId: 3,
+      title: "QS World University Rankings - Top 25",
+      description: "Consistently ranked among world's top 25 universities",
+      year: 2024,
+      icon: "📊",
+      category: "Academic Excellence",
+      impact: "Elite global university status",
+      details: "Ranked #21 globally with perfect scores across all ranking indicators"
+    },
+    {
+      id: 18,
+      universityId: 3,
+      title: "Medical School Leader",
+      description: "Faculty of Medicine ranked #15 globally by QS World University Rankings",
+      year: 2024,
+      icon: "⚕️",
+      category: "Academic Excellence",
+      impact: "World-leading medical education",
+      details: "Birthplace of insulin discovery and numerous medical breakthroughs"
+    },
+    {
+      id: 19,
+      universityId: 3,
+      title: "Computer Science Pioneer",
+      description: "Department of Computer Science ranked #18 globally for AI & Machine Learning",
+      year: 2024,
+      icon: "🤖",
+      category: "Academic Excellence",
+      impact: "Leading AI research and education",
+      details: "Home to Vector Institute and pioneering work in artificial intelligence"
+    },
+    // {
+    //   id: 20,
+    //   universityId: 3,
+    //   title: "Engineering Excellence",
+    //   description: "Faculty of Applied Science & Engineering ranked #22 globally",
+    //   year: 2024,
+    //   icon: "⚙️",
+    //   category: "Academic Excellence",
+    //   impact: "Top-tier engineering education",
+    //   details: "Innovative programs in robotics, sustainable energy, and biomedical engineering"
+    // },
+    // {
+    //   id: 21,
+    //   universityId: 3,
+    //   title: "Business School Success",
+    //   description: "Rotman School of Management ranked #25 globally for MBA programs",
+    //   year: 2024,
+    //   icon: "💼",
+    //   category: "Academic Excellence",
+    //   impact: "Elite business education",
+    //   details: "Renowned for integrative thinking and global business leadership"
+    // },
+    // {
+    //   id: 22,
+    //   universityId: 3,
+    //   title: "Research Funding Champion",
+    //   description: "Secured $1.2B in research funding for breakthrough discoveries",
+    //   year: 2024,
+    //   icon: "💰",
+    //   category: "Research Excellence",
+    //   impact: "Massive research investment",
+    //   details: "Leading research in quantum computing, regenerative medicine, and climate science"
+    // },
+    // {
+    //   id: 23,
+    //   universityId: 3,
+    //   title: "Global Student Community",
+    //   description: "25,000+ international students from 160+ countries",
+    //   year: 2024,
+    //   icon: "🌍",
+    //   category: "Global Engagement",
+    //   impact: "Largest international student body in Canada",
+    //   details: "Comprehensive international student services and cultural programs"
+    // },
+    // {
+    //   id: 24,
+    //   universityId: 3,
+    //   title: "Student Success Leader",
+    //   description: "94% graduation rate with 97% employment rate",
+    //   year: 2024,
+    //   icon: "🎓",
+    //   category: "Student Success",
+    //   impact: "Exceptional student outcomes",
+    //   details: "Comprehensive career services and strong industry partnerships"
+    // },
+    // {
+    //   id: 25,
+    //   universityId: 3,
+    //   title: "Innovation Hub",
+    //   description: "Launched 500+ startups through entrepreneurship programs",
+    //   year: 2024,
+    //   icon: "🚀",
+    //   category: "Innovation",
+    //   impact: "Major economic impact through innovation",
+    //   details: "Strong ecosystem connecting students, researchers, and industry partners"
+    // },
+    // {
+    //   id: 26,
+    //   universityId: 3,
+    //   title: "Library Excellence",
+    //   description: "44 libraries with 12 million+ volumes and digital resources",
+    //   year: 2024,
+    //   icon: "📚",
+    //   category: "Academic Excellence",
+    //   impact: "Comprehensive knowledge resources",
+    //   details: "Largest academic library system in Canada with extensive digital collections"
+    // },
+    // {
+    //   id: 27,
+    //   universityId: 3,
+    //   title: "Alumni Network",
+    //   description: "560,000+ alumni in 180+ countries worldwide",
+    //   year: 2024,
+    //   icon: "👥",
+    //   category: "Global Impact",
+    //   impact: "Extensive global network",
+    //   details: "Strong alumni engagement programs and career networking opportunities"
+    // }
+  ],
+  4: [
+    // University of British Columbia Achievements
+    {
+      id: 28,
+      universityId: 4,
+      title: "Nobel Prize in Economics",
+      description: "Dr. Robert Mundell awarded Nobel Prize for optimal currency area theory",
+      year: 2023,
+      icon: "🏆",
+      category: "Research Excellence",
+      impact: "Revolutionary economic theory",
+      details: "Foundational work in international economics and monetary policy"
+    },
+    {
+      id: 29,
+      universityId: 4,
+      title: "QS World University Rankings - Top 35",
+      description: "Consistently ranked among world's top 35 universities",
+      year: 2024,
+      icon: "📊",
+      category: "Academic Excellence",
+      impact: "Elite global university status",
+      details: "Ranked #34 globally with strong performance in research and international outlook"
+    },
+    {
+      id: 30,
+      universityId: 4,
+      title: "Medical Research Excellence",
+      description: "Faculty of Medicine ranked #32 globally by QS World University Rankings",
+      year: 2024,
+      icon: "⚕️",
+      category: "Academic Excellence",
+      impact: "World-leading medical research",
+      details: "Pioneering research in brain health, precision medicine, and public health"
+    },
+    {
+      id: 31,
+      universityId: 4,
+      title: "Forestry World Leader",
+      description: "Faculty of Forestry ranked #29 globally for Forest Sciences",
+      year: 2024,
+      icon: "🌲",
+      category: "Academic Excellence",
+      impact: "Global leadership in forestry education",
+      details: "Largest forestry faculty in Canada with extensive research facilities"
+    },
+    // {
+    //   id: 32,
+    //   universityId: 4,
+    //   title: "Environmental Engineering",
+    //   description: "Faculty of Applied Science ranked #41 globally for Environmental Engineering",
+    //   year: 2024,
+    //   icon: "🌿",
+    //   category: "Academic Excellence",
+    //   impact: "Leading environmental engineering education",
+    //   details: "Pioneering research in sustainable technology and climate solutions"
+    // },
+    // {
+    //   id: 33,
+    //   universityId: 4,
+    //   title: "Business Innovation",
+    //   description: "Sauder School of Business ranked #48 globally for MBA programs",
+    //   year: 2024,
+    //   icon: "💼",
+    //   category: "Academic Excellence",
+    //   impact: "Top-tier business education",
+    //   details: "Renowned for sustainability-focused business education and innovation"
+    // },
+    // {
+    //   id: 34,
+    //   universityId: 4,
+    //   title: "Research Investment",
+    //   description: "Secured $720M in research funding for breakthrough discoveries",
+    //   year: 2024,
+    //   icon: "💰",
+    //   category: "Research Excellence",
+    //   impact: "Substantial research investment",
+    //   details: "Leading research in sustainability, neuroscience, and clean energy"
+    // },
+    // {
+    //   id: 35,
+    //   universityId: 4,
+    //   title: "International Community",
+    //   description: "18,000+ international students from 140+ countries",
+    //   year: 2024,
+    //   icon: "🌍",
+    //   category: "Global Engagement",
+    //   impact: "Diverse international community",
+    //   details: "Comprehensive international student support and cultural programs"
+    // },
+    // {
+    //   id: 36,
+    //   universityId: 4,
+    //   title: "Student Achievement",
+    //   description: "91% graduation rate with 95% employment rate",
+    //   year: 2024,
+    //   icon: "🎓",
+    //   category: "Student Success",
+    //   impact: "Excellent student outcomes",
+    //   details: "Strong career preparation and industry connections"
+    // },
+    // {
+    //   id: 37,
+    //   universityId: 4,
+    //   title: "Sustainability Leadership",
+    //   description: "Achieved carbon neutrality and 100% renewable energy",
+    //   year: 2024,
+    //   icon: "🌱",
+    //   category: "Sustainability",
+    //   impact: "Environmental leadership",
+    //   details: "Comprehensive sustainability initiatives and green campus operations"
+    // },
+    // {
+    //   id: 38,
+    //   universityId: 4,
+    //   title: "Innovation Ecosystem",
+    //   description: "Launched 300+ startups through entrepreneurship programs",
+    //   year: 2024,
+    //   icon: "🚀",
+    //   category: "Innovation",
+    //   impact: "Significant economic impact",
+    //   details: "Strong innovation ecosystem connecting students, researchers, and industry"
+    // },
+    // {
+    //   id: 39,
+    //   universityId: 4,
+    //   title: "Library Excellence",
+    //   description: "21 libraries with 7 million+ volumes and digital resources",
+    //   year: 2024,
+    //   icon: "📚",
+    //   category: "Academic Excellence",
+    //   impact: "Comprehensive knowledge resources",
+    //   details: "Extensive collections including rare books and digital archives"
+    // },
+    // {
+    //   id: 40,
+    //   universityId: 4,
+    //   title: "Alumni Network",
+    //   description: "350,000+ alumni in 140+ countries worldwide",
+    //   year: 2024,
+    //   icon: "👥",
+    //   category: "Global Impact",
+    //   impact: "Extensive global network",
+    //   details: "Strong alumni engagement and career networking programs"
+    // }
+  ]
 }

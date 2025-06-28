@@ -32,6 +32,8 @@ export function AchievementsSection({ achievements }: AchievementsSectionProps) 
     }
   }
 
+  console.log(achievements,'This is achievements')
+
   return (
     <Card className="bg-gradient-to-br from-white via-white to-blue-50 dark:from-gray-800 dark:via-gray-800 dark:to-blue-900/20 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 hover:shadow-2xl transition-all duration-500">
       <div className="flex items-center space-x-3 mb-6">

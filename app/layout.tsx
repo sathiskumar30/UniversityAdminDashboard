@@ -8,9 +8,13 @@ import { ThemeProvider } from "./providers/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Université de Montréal - Admin Dashboard",
+  title: "Admin Panel",
   description: "University ranking dashboard and administration panel",
-    generator: 'v0.dev'
+  icons: {
+    icon: "./favicon.png", 
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 }
 
 export default function RootLayout({

@@ -117,8 +117,10 @@ export function ComprehensiveUniversityProfile({
               {currentRank && (
                 <div className="flex justify-center lg:justify-start">
                   <Badge className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg">
-                    <Award className="h-5 w-5 mr-2" />
-                    <span className="font-bold">World Rank #{currentRank}</span>
+                    <div className="flex items-center">
+                      <Award className="h-5 w-5 mr-2" />
+                      <span className="font-bold">World Rank #{currentRank}</span>
+                    </div>
                   </Badge>
                 </div>
               )}
@@ -259,8 +261,9 @@ export function ComprehensiveUniversityProfile({
           {/* Website link */}
           <div className="flex justify-center">
             <Button
+              as="a"
               href={`https://${university.website}`}
-              // target="_blank"
+              target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
               color="blue"

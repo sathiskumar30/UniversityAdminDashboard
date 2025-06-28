@@ -27,7 +27,7 @@ interface RankingChartProps {
 
 export function RankingChart({ data }: RankingChartProps) {
   const { theme } = useTheme()
-  const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+  const isDark = theme === "dark";
 
   const chartData = {
     labels: data.map((d) => d.year.toString()),
