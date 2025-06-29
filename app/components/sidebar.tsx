@@ -1,4 +1,4 @@
-"use client"
+  "use client"
 
 import type React from "react"
 import { useState } from "react"
@@ -25,7 +25,7 @@ export function Sidebar({ children }: SidebarProps) {
       {/* Mobile menu button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-3 left-3 z-50 p-2.5 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-200"
+        className="lg:hidden fixed top-1 left-1 z-50 p-2.5 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-200"
         color="gray"
         size="sm"
       >
@@ -90,11 +90,11 @@ export function Sidebar({ children }: SidebarProps) {
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         {/* Header */}
         <Navbar className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center justify-between h-10 sm:h-11 px-4 sm:px-6 w-full">
-            <div className="flex items-center space-x-3 sm:space-x-4">
-              <h1 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white ml-8 lg:ml-0">Dashboard</h1>
+          <div className="flex items-center justify-center lg:justify-between h-10 sm:h-11 px-4 sm:px-6 w-full">
+            <div className="flex items-center space-x-3 sm:space-x-4 ">
+              <h1 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white ml-14 lg:ml-0 ">Dashboard</h1>
             </div>
-            <div className="flex items-center space-x-3 sm:space-x-4">
+            <div className="flex items-center space-x-3 sm:space-x-4 ">
               <div className="hidden sm:block">
                 <ThemeToggle />
               </div>
