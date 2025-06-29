@@ -63,14 +63,28 @@ npm install
 pnpm install
 ```
 
-3. **Start the dev server**
+3. **Seed the database (Important!)**
+```bash
+# Run the seed script to populate the database with university data
+npx tsx app/lib/seed.ts
+```
+
+This will create and populate the SQLite database with:
+- University profiles and rankings
+- Achievement data
+- Statistics and performance metrics
+- Subject rankings
+
+*Note: The database file will be created at `database/university.db`*
+
+4. **Start the dev server**
 ```bash
 npm run dev
 # or
 pnpm dev
 ```
 
-4. **Open your browser**
+5. **Open your browser**
 Go to [http://localhost:3000](http://localhost:3000) and you should see the magic!
 
 ### Environment Variables (Optional)
