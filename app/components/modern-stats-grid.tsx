@@ -22,12 +22,12 @@ interface ModernStatsGridProps {
 export function ModernStatsGrid({ data, isLoading }: ModernStatsGridProps) {
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
         {Array.from({ length: 8 }).map((_, i) => (
           <Card key={i} className="animate-pulse">
-            <div className="h-12 w-12 bg-gray-200 dark:bg-gray-700 rounded-xl mb-4" />
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2" />
-            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded" />
+            <div className="h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 dark:bg-gray-700 rounded-lg sm:rounded-xl mb-3 sm:mb-4" />
+            <div className="h-3 sm:h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2" />
+            <div className="h-5 sm:h-6 bg-gray-200 dark:bg-gray-700 rounded" />
           </Card>
         ))}
       </div>
@@ -107,42 +107,42 @@ export function ModernStatsGrid({ data, isLoading }: ModernStatsGridProps) {
   ]
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
       {stats.map((stat, index) => (
         <Card
           key={index}
-          className={`group relative overflow-hidden bg-gradient-to-br ${stat.bgGradient} hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer border border-white/20 dark:border-gray-700/50`}
+          className={`group relative overflow-hidden bg-gradient-to-br ${stat.bgGradient} hover:shadow-xl sm:hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer border border-white/20 dark:border-gray-700/50`}
           style={{
             animationDelay: `${index * 100}ms`,
             animation: "slideInUp 0.6s ease-out forwards",
           }}
         >
           {/* Background decoration */}
-          <div className="absolute top-0 right-0 w-20 h-20 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
+          <div className="absolute top-0 right-0 w-16 h-16 sm:w-20 sm:h-20 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
             <stat.icon className="w-full h-full" />
           </div>
 
           {/* Trend indicator */}
           {stat.trend && (
             <div
-              className={`absolute top-4 right-4 w-2 h-2 rounded-full ${
+              className={`absolute top-2 sm:top-4 right-2 sm:right-4 w-2 h-2 rounded-full ${
                 stat.trend === "up" ? "bg-green-400" : "bg-red-400"
               } animate-pulse`}
             />
           )}
 
           <div className="relative z-10">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
               <div
-                className={`p-3 rounded-xl bg-gradient-to-r ${stat.gradient} shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                className={`p-2 sm:p-3 rounded-lg sm:rounded-xl bg-gradient-to-r ${stat.gradient} shadow-lg group-hover:scale-110 transition-transform duration-300`}
               >
-                <stat.icon className="h-6 w-6 text-white" />
+                <stat.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               </div>
             </div>
 
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">{stat.title}</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 mb-1 sm:mb-2">{stat.title}</p>
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
                 {stat.value}
               </p>
             </div>

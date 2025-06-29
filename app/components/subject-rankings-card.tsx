@@ -35,37 +35,37 @@ export function SubjectRankingsCard({ rankings }: SubjectRankingsCardProps) {
   }
 
   return (
-    <Card className="bg-gradient-to-br from-white via-white to-purple-50 dark:from-gray-800 dark:via-gray-800 dark:to-purple-900/20 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 hover:shadow-2xl transition-all duration-500">
-      <div className="flex items-center space-x-3 mb-6">
-        <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
-          <BarChart3 className="h-6 w-6 text-white" />
+    <Card className="bg-gradient-to-br from-white via-white to-purple-50 dark:from-gray-800 dark:via-gray-800 dark:to-purple-900/20 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover:shadow-xl sm:hover:shadow-2xl transition-all duration-500">
+      <div className="flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6">
+        <div className="p-1.5 sm:p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
+          <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
         </div>
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white">Subject Rankings 2024</h3>
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Subject Rankings 2024</h3>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {rankings.map((ranking, index) => (
           <div
             key={ranking.id}
-            className="group relative p-4 bg-white dark:bg-gray-700/50 rounded-xl border border-gray-100 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-300 hover:shadow-lg"
+            className="group relative p-3 sm:p-4 bg-white dark:bg-gray-700/50 rounded-lg sm:rounded-xl border border-gray-100 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-300 hover:shadow-md sm:hover:shadow-lg"
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${getSubjectColor(ranking.category)}`} />
+              <div className="flex items-center space-x-3 sm:space-x-4">
+                <div className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-gradient-to-r ${getSubjectColor(ranking.category)}`} />
                 <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
+                  <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300 text-sm sm:text-base">
                     {ranking.category}
                   </h4>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">World Ranking</p>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">World Ranking</p>
                 </div>
               </div>
               <div className="text-right">
-                <div className="flex items-center space-x-2">
-                  <span className="text-2xl font-bold text-gray-900 dark:text-white">#{ranking.rank}</span>
-                  <TrendingUp className="h-4 w-4 text-green-500" />
+                <div className="flex items-center space-x-1 sm:space-x-2">
+                  <span className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">#{ranking.rank}</span>
+                  <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-green-500" />
                 </div>
-                <p className={`text-sm font-medium ${getScoreColor(ranking.score)}`}>Score: {ranking.score}</p>
+                <p className={`text-xs sm:text-sm font-medium ${getScoreColor(ranking.score)}`}>Score: {ranking.score}</p>
               </div>
             </div>
           </div>

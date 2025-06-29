@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { UNIVERSITIES_DATA } from "../../lib/constants"
+import { dbQueries } from "../../lib/database"
 
 export async function GET(request: Request) {
   try {
@@ -9,10 +9,38 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const id = Number.parseInt(searchParams.get("id") || "1")
 
-    const university = UNIVERSITIES_DATA.find((u) => u.id === id)
+    const university = dbQueries.getUniversityById(id)
 
     if (university) {
-      return NextResponse.json(university)
+      // Transform the data to match frontend expectations
+      const transformedUniversity = {
+        ...university,
+        keyFacts: (() => {
+          try {
+            return (university as any).keyFacts ? JSON.parse((university as any).keyFacts) : []
+          } catch {
+            return []
+          }
+        })(),
+        rankings: {
+          worldRank: (university as any).worldRank,
+          nationalRank: (university as any).nationalRank,
+          quebecRank: (university as any).quebecRank
+        },
+        contact: {
+          address: (university as any).address,
+          phone: (university as any).phone,
+          email: (university as any).email
+        },
+        socialMedia: {
+          twitter: (university as any).twitter,
+          linkedin: (university as any).linkedin,
+          facebook: (university as any).facebook,
+          instagram: (university as any).instagram
+        }
+      }
+      
+      return NextResponse.json(transformedUniversity)
     }
 
     return NextResponse.json({ error: "University not found" }, { status: 404 })

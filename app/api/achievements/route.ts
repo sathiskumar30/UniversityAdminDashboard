@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { ACHIEVEMENTS_DATA } from "../../lib/constants"
+import { dbQueries } from "../../lib/database"
 
 export async function GET(request: Request) {
   try {
@@ -12,12 +12,13 @@ export async function GET(request: Request) {
 
     if (universityId) {
       const id = parseInt(universityId)
-      const universityAchievements = ACHIEVEMENTS_DATA[id as keyof typeof ACHIEVEMENTS_DATA] || []
+      const universityAchievements = dbQueries.getAchievementsByUniversityId(id) || []
       return NextResponse.json(universityAchievements)
     }
 
-    // Return all achievements if no universityId specified
-    return NextResponse.json(ACHIEVEMENTS_DATA[1])
+    // Return all achievements for university 1 if no universityId specified
+    const defaultAchievements = dbQueries.getAchievementsByUniversityId(1) || []
+    return NextResponse.json(defaultAchievements)
   } catch (error) {
     console.error("Error in achievements API:", error)
     return NextResponse.json({ error: "Failed to fetch achievements" }, { status: 500 })

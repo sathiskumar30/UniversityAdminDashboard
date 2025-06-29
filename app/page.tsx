@@ -252,24 +252,26 @@ export default function Dashboard() {
   return (
     <ErrorBoundary>
       <Sidebar>
-        <div className="p-6 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900/20 min-h-full">
+        <div className="p-3 sm:p-4 lg:p-6 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900/20 min-h-full">
           {/* Welcome Header */}
-          <div className="mb-8 text-center">
-            <h1 className="text-4xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+          <div className="mb-6 sm:mb-8 text-center">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-3 sm:mb-4">
               University Rankings Dashboard
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 text-lg max-w-3xl mx-auto mb-8">
+            <p className="text-gray-600 dark:text-gray-400 text-base sm:text-lg max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
               Select a university to explore comprehensive ranking data, institutional profiles, and performance
               analytics
             </p>
 
             {/* University Selector */}
             {transformedUniversities.length > 0 && (
-              <UniversitySelector
-                universities={transformedUniversities}
-                selectedUniversity={selectedUniversity}
-                onUniversitySelect={handleUniversitySelect}
-              />
+              <div className="px-4">
+                <UniversitySelector
+                  universities={transformedUniversities}
+                  selectedUniversity={selectedUniversity}
+                  onUniversitySelect={handleUniversitySelect}
+                />
+              </div>
             )}
           </div>
 
@@ -277,30 +279,32 @@ export default function Dashboard() {
           {selectedUniversity && (
             <>
               {/* University Name Header */}
-              <div className="mb-8 text-center">
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{selectedUniversity.name}</h2>
-                <p className="text-gray-600 dark:text-gray-400">Ranking Analytics & Institutional Profile</p>
+              <div className="mb-6 sm:mb-8 text-center px-4">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">{selectedUniversity.name}</h2>
+                <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">Ranking Analytics & Institutional Profile</p>
               </div>
 
               {/* Modern Stats Grid */}
               {statistics && (
-                <ModernStatsGrid data={statistics} isLoading={isLoadingStatistics} />
+                <div className="mb-6 sm:mb-8">
+                  <ModernStatsGrid data={statistics} isLoading={isLoadingStatistics} />
+                </div>
               )}
 
               {/* Main Content: Chart Section */}
-              <div className="mb-8">
-                <Card className="bg-gradient-to-br from-white via-white to-gray-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 p-8 hover:shadow-3xl transition-all duration-500">
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              <div className="mb-6 sm:mb-8">
+                <Card className="bg-gradient-to-br from-white via-white to-gray-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 lg:p-8 hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-500">
+                  <div className="mb-4 sm:mb-6">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
                       5-Year Ranking Performance (2020-2024)
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                       QS World University Rankings - Overall Performance Trend
                     </p>
                   </div>
                   <Suspense
                     fallback={
-                      <div className="h-96 flex items-center justify-center">
+                      <div className="h-64 sm:h-80 lg:h-96 flex items-center justify-center">
                         <LoadingSpinner size="lg" text="Loading ranking chart..." />
                       </div>
                     }
@@ -308,7 +312,7 @@ export default function Dashboard() {
                     {rankings.length > 0 ? (
                       <RankingChart data={rankings} />
                     ) : (
-                      <div className="h-96 flex items-center justify-center">
+                      <div className="h-64 sm:h-80 lg:h-96 flex items-center justify-center">
                         <LoadingSpinner size="lg" text="Loading ranking data..." />
                       </div>
                     )}
@@ -317,11 +321,11 @@ export default function Dashboard() {
               </div>
 
               {/* Secondary Content Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
                 {/* Subject Rankings */}
                 <Suspense
                   fallback={
-                    <Card className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 p-8">
+                    <Card className="bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 lg:p-8">
                       <LoadingSpinner size="lg" text="Loading subject rankings..." />
                     </Card>
                   }
@@ -334,7 +338,7 @@ export default function Dashboard() {
                 {/* Achievements */}
                 <Suspense
                   fallback={
-                    <Card className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 p-8">
+                    <Card className="bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 lg:p-8">
                       <LoadingSpinner size="lg" text="Loading achievements..." />
                     </Card>
                   }
@@ -346,12 +350,12 @@ export default function Dashboard() {
               </div>
 
               {/* University Profile Section - Moved to bottom */}
-              <div className="mb-8">
-                <div className="mb-6">
-                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <div className="mb-6 sm:mb-8">
+                <div className="mb-4 sm:mb-6 px-4">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
                     University Profile & Information
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                     Comprehensive details including history, academics, and contact information
                   </p>
                 </div>
@@ -377,7 +381,7 @@ export default function Dashboard() {
 
           {/* Loading state when no university selected */}
           {!selectedUniversity && universitiesList.isLoading && (
-            <div className="flex items-center justify-center py-20">
+            <div className="flex items-center justify-center py-16 sm:py-20">
               <LoadingSpinner size="lg" text="Loading universities..." />
             </div>
           )}

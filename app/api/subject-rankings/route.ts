@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { SUBJECT_RANKINGS_BY_UNIVERSITY } from "../../lib/constants"
+import { dbQueries } from "../../lib/database"
 
 export async function GET(request: Request) {
   try {
@@ -9,10 +9,11 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const universityId = Number.parseInt(searchParams.get("universityId") || "1")
 
-    const rankings = SUBJECT_RANKINGS_BY_UNIVERSITY[universityId as keyof typeof SUBJECT_RANKINGS_BY_UNIVERSITY]
+    // Get subject rankings for the university
+    const subjectRankings = dbQueries.getSubjectRankingsByUniversityId(universityId)
 
-    if (rankings) {
-      return NextResponse.json(rankings)
+    if (subjectRankings.length > 0) {
+      return NextResponse.json(subjectRankings)
     }
 
     return NextResponse.json({ error: "Subject rankings not found for this university" }, { status: 404 })

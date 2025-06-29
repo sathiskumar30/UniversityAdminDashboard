@@ -1,9 +1,9 @@
 // Enhanced constant data with multiple universities
 
-import university from '../../public/university.png'
-import mcgill from '../../public/mcgill.png'
-import toronto from '../../public/toronto.png'
-import ubc from '../../public/ubc.png'
+// import university from '../../public/university.png'
+// import mcgill from '../../public/mcgill.png'
+// import toronto from '../../public/toronto.png'
+// import ubc from '../../public/ubc.png'
 
 export const UNIVERSITIES_DATA = [
   {
@@ -20,7 +20,7 @@ export const UNIVERSITIES_DATA = [
     detailedDescription:
       "As Quebec's premier francophone university, UdeM has established itself as a global leader in higher education and research. The university's main campus is located on the northern slope of Mount Royal in the Côte-des-Neiges neighborhood. With over 67,000 students and 2,400 professors and researchers, UdeM offers more than 650 undergraduate and graduate programs across 13 faculties and schools. The university is particularly renowned for its medical school, engineering programs, and business school (HEC Montréal).",
     // logoUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Universit%C3%A9_de_Montr%C3%A9al_logo.svg/1200px-Universit%C3%A9_de_Montr%C3%A9al_logo.svg.png",
-    logoUrl:university,
+    logoUrl: "/university.png",
     founded: 1878,
     type: "Public Research University",
     students: "67,847",
@@ -81,7 +81,7 @@ export const UNIVERSITIES_DATA = [
     detailedDescription:
       "McGill University is one of Canada's most prestigious institutions, known for its rigorous academic standards and groundbreaking research. Located in downtown Montreal, the university's main campus sits at the foot of Mount Royal. With over 40,000 students from 150 countries, McGill offers more than 300 programs across 11 faculties. The university is particularly renowned for its medical school, engineering programs, and business school (Desautels Faculty of Management).",
     // logoUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/McGill_University_CoA.svg/1200px-McGill_University_CoA.svg.png",
-    logoUrl:mcgill,
+    logoUrl: "/mcgill.png",
     founded: 1821,
     type: "Public Research University",
     students: "40,883",
@@ -142,7 +142,7 @@ export const UNIVERSITIES_DATA = [
     detailedDescription:
       "The University of Toronto is Canada's largest university with three campuses: St. George (downtown Toronto), Mississauga, and Scarborough. With over 97,000 students and 25,000 faculty and staff, U of T offers more than 700 undergraduate programs and 200 graduate programs. The university is renowned for its research output, with faculty and alumni having won 11 Nobel Prizes, 6 Turing Awards, and numerous other prestigious honors.",
     // logoUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/b/b7/University_of_Toronto_coat_of_arms.svg/1200px-University_of_Toronto_coat_of_arms.svg.png",
-    logoUrl:toronto,
+    logoUrl: "/toronto.png",
     founded: 1827,
     type: "Public Research University",
     students: "97,757",
@@ -203,7 +203,7 @@ export const UNIVERSITIES_DATA = [
     detailedDescription:
       "UBC is one of Canada's most prestigious universities, with two main campuses: Vancouver (Point Grey) and Okanagan (Kelowna). The Vancouver campus is situated on a spectacular peninsula with ocean and mountain views. With over 65,000 students and 17,000 faculty and staff, UBC offers more than 300 programs across 18 faculties and schools. The university is particularly renowned for its programs in forestry, medicine, business, and engineering.",
     // logoUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/University_of_British_Columbia_logo.svg/1200px-University_of_British_Columbia_logo.svg.png",
-    logoUrl:ubc,
+    logoUrl: "/ubc.png",
     founded: 1908,
     type: "Public Research University",
     students: "65,844",
@@ -605,7 +605,7 @@ export const SUBJECT_RANKINGS_BY_UNIVERSITY = {
       source: "QS World University Rankings by Subject",
     },
   ],
-}
+} 
 
 export const STATISTICS_DATA_BY_UNIVERSITY = {
   1: {

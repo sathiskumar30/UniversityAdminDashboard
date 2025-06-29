@@ -1,26 +1,58 @@
 import { initTRPC, TRPCError } from "@trpc/server"
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch"
 import { z } from "zod"
-import { UNIVERSITIES_DATA } from "../../lib/constants"
+import { dbQueries } from "../../lib/database"
 
 const t = initTRPC.create()
 
 const appRouter = t.router({
   getUniversities: t.procedure.query(() => {
-    console.log("tRPC: Getting all universities")
-    return UNIVERSITIES_DATA
+    const universities = dbQueries.getAllUniversities()
+    return universities.map((uni: any) => ({
+      id: uni.id,
+      name: uni.name,
+      shortName: uni.shortName,
+      city: uni.city,
+      province: uni.province,
+      country: uni.country,
+      logoUrl: uni.logoUrl,
+      rankings: {
+        worldRank: uni.worldRank,
+        nationalRank: uni.nationalRank,
+        quebecRank: uni.quebecRank
+      }
+    }))
   }),
 
   getUniversity: t.procedure.input(z.object({ id: z.number() })).query(({ input }) => {
-    console.log("tRPC: Getting university with id:", input.id)
-    const university = UNIVERSITIES_DATA.find((u) => u.id === input.id)
+    const university = dbQueries.getUniversityById(input.id)
     if (!university) {
       throw new TRPCError({
         code: 'NOT_FOUND',
         message: `University with id ${input.id} not found`,
       })
     }
-    return university
+    
+    // Transform the data to match frontend expectations
+    return {
+      ...university,
+      rankings: {
+        worldRank: (university as any).worldRank,
+        nationalRank: (university as any).nationalRank,
+        quebecRank: (university as any).quebecRank
+      },
+      contact: {
+        address: (university as any).address,
+        phone: (university as any).phone,
+        email: (university as any).email
+      },
+      socialMedia: {
+        twitter: (university as any).twitter,
+        linkedin: (university as any).linkedin,
+        facebook: (university as any).facebook,
+        instagram: (university as any).instagram
+      }
+    }
   }),
 })
 

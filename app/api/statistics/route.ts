@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { STATISTICS_DATA_BY_UNIVERSITY } from "../../lib/constants"
+import { dbQueries } from "../../lib/database"
 
 export async function GET(request: Request) {
   try {
@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const universityId = Number.parseInt(searchParams.get("universityId") || "1")
 
-    const statistics = STATISTICS_DATA_BY_UNIVERSITY[universityId as keyof typeof STATISTICS_DATA_BY_UNIVERSITY]
+    const statistics = dbQueries.getStatisticsByUniversityId(universityId)
 
     if (statistics) {
       return NextResponse.json(statistics)
