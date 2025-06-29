@@ -265,13 +265,13 @@ export function ComprehensiveUniversityProfile({
               href={`https://${university.website}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 sm:space-x-3 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg sm:rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base"
+              className="inline-flex items-center gap-4 space-x-2 sm:space-x-3 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg sm:rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base"
               color="blue"
-              size="lg"
+              // size="lg"
             >
-              <Globe className="h-4 w-4 sm:h-5 sm:w-5" />
+              <Globe className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
               <span className="font-medium">Visit Official Website</span>
-              <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4" />
+              <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 ml-2" />
             </Button>
           </div>
         </div>

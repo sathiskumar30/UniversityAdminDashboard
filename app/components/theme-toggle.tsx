@@ -11,7 +11,7 @@ export function ThemeToggle() {
     <div className="flex items-center space-x-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
       <Button
         onClick={() => setTheme("light")}
-        className={`p-2 rounded-md transition-colors ${
+        className={`p-1 rounded-md transition-colors ${
           theme === "light" ? "bg-white dark:bg-gray-700 shadow-sm" : "hover:bg-gray-200 dark:hover:bg-gray-700"
         }`}
         title="Light mode"
@@ -22,7 +22,7 @@ export function ThemeToggle() {
       </Button>
       <Button
         onClick={() => setTheme("dark")}
-        className={`p-2 rounded-md transition-colors ${
+        className={`p-1 rounded-md transition-colors ${
           theme === "dark" ? "bg-white dark:bg-gray-700 shadow-sm" : "hover:bg-gray-200 dark:hover:bg-gray-700"
         }`}
         title="Dark mode"
