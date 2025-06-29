@@ -7,7 +7,7 @@ import { ModernStatsGrid } from "./components/modern-stats-grid"
 import { ComprehensiveUniversityProfile } from "./components/comprehensive-university-profile"
 import { UniversitySelector } from "./components/university-selector"
 import { LoadingSpinner } from "./components/loading-spinner"
-import { useApi } from "./hooks/use-api"
+import { trpc } from "./lib/trpc"
 import { Card, Button } from 'flowbite-react'
 
 // Lazy load heavy components
@@ -19,6 +19,7 @@ const SubjectRankingsCard = lazy(() =>
   import("./components/subject-rankings-card").then((m) => ({ default: m.SubjectRankingsCard })),
 )
 
+// Interface matching what the components expect
 interface University {
   id: number
   name: string
@@ -30,29 +31,163 @@ interface University {
   rankings: {
     worldRank: number
     nationalRank: number
+    quebecRank?: number
   }
+}
+
+interface Achievement {
+  id: number
+  universityId: number
+  title: string
+  description: string
+  year: number
+  icon: string
+}
+
+interface StatisticsData {
+  currentRank: number
+  previousRank: number
+  bestRank: number
+  averageScore: number
+  yearsTracked: number
+  totalAchievements: number
+  researchFunding: string
+  internationalStudents: string
+}
+
+interface RankingData {
+  id: number
+  year: number
+  rank: number
+  score: number
+  category: string
+  change: number
+  source: string
+}
+
+interface SubjectRanking {
+  id: number
+  universityId: number
+  year: number
+  rank: number
+  score: number
+  category: string
 }
 
 export default function Dashboard() {
   const [selectedUniversityId, setSelectedUniversityId] = useState<number>(1)
   const [selectedUniversity, setSelectedUniversity] = useState<University | null>(null)
+  const [achievements, setAchievements] = useState<Achievement[]>([])
+  const [statistics, setStatistics] = useState<StatisticsData | null>(null)
+  const [rankings, setRankings] = useState<RankingData[]>([])
+  const [subjectRankings, setSubjectRankings] = useState<SubjectRanking[]>([])
+  const [isLoadingAchievements, setIsLoadingAchievements] = useState(false)
+  const [isLoadingStatistics, setIsLoadingStatistics] = useState(false)
+  const [isLoadingRankings, setIsLoadingRankings] = useState(false)
+  const [isLoadingSubjectRankings, setIsLoadingSubjectRankings] = useState(false)
+  const [achievementsError, setAchievementsError] = useState<string | null>(null)
+  const [statisticsError, setStatisticsError] = useState<string | null>(null)
+  const [rankingsError, setRankingsError] = useState<string | null>(null)
+  const [subjectRankingsError, setSubjectRankingsError] = useState<string | null>(null)
 
-  // Fetch universities list
-  const universitiesList = useApi("/api/universities")
+  // tRPC queries with proper error handling and caching
+  const universitiesList = trpc.getUniversities.useQuery()
+  const university = trpc.getUniversity.useQuery(
+    { id: selectedUniversityId },
+    { 
+      enabled: !!selectedUniversityId,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    }
+  )
 
-  // Fetch data for selected university
-  const university = useApi(`/api/university?id=${selectedUniversityId}`)
-  const rankings = useApi(`/api/rankings?universityId=${selectedUniversityId}`)
-  const subjectRankings = useApi(`/api/subject-rankings?universityId=${selectedUniversityId}`)
-  const achievements = useApi("/api/achievements")
-  const statistics = useApi(`/api/statistics?universityId=${selectedUniversityId}`)
+  // Fetch achievements and statistics using regular GET requests
+  useEffect(() => {
+    if (selectedUniversityId) {
+      // Fetch achievements
+      setIsLoadingAchievements(true)
+      setAchievementsError(null)
+      fetch(`/api/achievements?universityId=${selectedUniversityId}`)
+        .then(res => res.json())
+        .then(data => {
+          setAchievements(data)
+          setIsLoadingAchievements(false)
+        })
+        .catch(error => {
+          console.error('Error fetching achievements:', error)
+          setAchievementsError('Failed to load achievements')
+          setIsLoadingAchievements(false)
+        })
+
+      // Fetch statistics
+      setIsLoadingStatistics(true)
+      setStatisticsError(null)
+      fetch(`/api/statistics?universityId=${selectedUniversityId}`)
+        .then(res => res.json())
+        .then(data => {
+          setStatistics(data)
+          setIsLoadingStatistics(false)
+        })
+        .catch(error => {
+          console.error('Error fetching statistics:', error)
+          setStatisticsError('Failed to load statistics')
+          setIsLoadingStatistics(false)
+        })
+
+      // Fetch rankings
+      setIsLoadingRankings(true)
+      setRankingsError(null)
+      fetch(`/api/rankings?universityId=${selectedUniversityId}`)
+        .then(res => res.json())
+        .then(data => {
+          setRankings(data)
+          setIsLoadingRankings(false)
+        })
+        .catch(error => {
+          console.error('Error fetching rankings:', error)
+          setRankingsError('Failed to load rankings')
+          setIsLoadingRankings(false)
+        })
+
+      // Fetch subject rankings
+      setIsLoadingSubjectRankings(true)
+      setSubjectRankingsError(null)
+      fetch(`/api/subject-rankings?universityId=${selectedUniversityId}`)
+        .then(res => res.json())
+        .then(data => {
+          setSubjectRankings(data)
+          setIsLoadingSubjectRankings(false)
+        })
+        .catch(error => {
+          console.error('Error fetching subject rankings:', error)
+          setSubjectRankingsError('Failed to load subject rankings')
+          setIsLoadingSubjectRankings(false)
+        })
+    }
+  }, [selectedUniversityId])
 
   // Update selected university when universities list loads
   useEffect(() => {
     if (universitiesList.data && !selectedUniversity) {
-      const defaultUniversity = universitiesList.data.find((u: University) => u.id === selectedUniversityId)
+      const defaultUniversity = universitiesList.data.find((u: any) => u.id === selectedUniversityId)
       if (defaultUniversity) {
-        setSelectedUniversity(defaultUniversity)
+        // Transform the data to match the expected interface
+        const transformedUniversity: University = {
+          id: defaultUniversity.id,
+          name: defaultUniversity.name,
+          shortName: defaultUniversity.shortName,
+          city: defaultUniversity.city,
+          province: defaultUniversity.province,
+          country: defaultUniversity.country,
+          logoUrl: typeof defaultUniversity.logoUrl === 'string' 
+            ? defaultUniversity.logoUrl 
+            : defaultUniversity.logoUrl?.src || '/placeholder.svg',
+          rankings: {
+            worldRank: defaultUniversity.rankings?.worldRank || 0,
+            nationalRank: defaultUniversity.rankings?.nationalRank || 0,
+            quebecRank: defaultUniversity.rankings?.quebecRank || 0
+          }
+        }
+        setSelectedUniversity(transformedUniversity)
       }
     }
   }, [universitiesList.data, selectedUniversity, selectedUniversityId])
@@ -62,8 +197,26 @@ export default function Dashboard() {
     setSelectedUniversityId(university.id)
   }
 
-  const isLoading = university.loading || rankings.loading || statistics.loading
-  const hasError = university.error || rankings.error || statistics.error
+  // Transform universities data for the selector
+  const transformedUniversities = universitiesList.data?.map((u: any): University => ({
+    id: u.id,
+    name: u.name,
+    shortName: u.shortName,
+    city: u.city,
+    province: u.province,
+    country: u.country,
+    logoUrl: typeof u.logoUrl === 'string' ? u.logoUrl : 
+             u.logoUrl?.src || '/placeholder.svg',
+    rankings: {
+      worldRank: u.rankings?.worldRank || 0,
+      nationalRank: u.rankings?.nationalRank || 0,
+      quebecRank: u.rankings?.quebecRank || 0
+    }
+  })) || []
+
+  // Combined loading and error states
+  const isLoading = university.isLoading || isLoadingAchievements || isLoadingStatistics || isLoadingRankings || isLoadingSubjectRankings
+  const hasError = university.error || achievementsError || statisticsError || rankingsError || subjectRankingsError
 
   if (hasError) {
     return (
@@ -73,10 +226,16 @@ export default function Dashboard() {
             <div className="text-center py-12">
               <h2 className="text-xl font-semibold text-red-600 dark:text-red-400 mb-2">Failed to Load Data</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                {university.error || rankings.error || statistics.error}
+                {university.error?.message || achievementsError || statisticsError || rankingsError || subjectRankingsError}
               </p>
               <Button
-                onClick={() => window.location.reload()}
+                onClick={() => {
+                  // Refetch all queries
+                  universitiesList.refetch()
+                  university.refetch()
+                  // Trigger re-fetch of achievements and statistics
+                  setSelectedUniversityId(selectedUniversityId)
+                }}
                 className="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl"
                 color="red"
                 size="lg"
@@ -105,9 +264,9 @@ export default function Dashboard() {
             </p>
 
             {/* University Selector */}
-            {universitiesList.data && (
+            {transformedUniversities.length > 0 && (
               <UniversitySelector
-                universities={universitiesList.data}
+                universities={transformedUniversities}
                 selectedUniversity={selectedUniversity}
                 onUniversitySelect={handleUniversitySelect}
               />
@@ -124,7 +283,9 @@ export default function Dashboard() {
               </div>
 
               {/* Modern Stats Grid */}
-              <ModernStatsGrid data={statistics.data} isLoading={statistics.loading} />
+              {statistics && (
+                <ModernStatsGrid data={statistics} isLoading={isLoadingStatistics} />
+              )}
 
               {/* Main Content: Chart Section */}
               <div className="mb-8">
@@ -144,8 +305,8 @@ export default function Dashboard() {
                       </div>
                     }
                   >
-                    {rankings.data && rankings.data.length > 0 ? (
-                      <RankingChart data={rankings.data} />
+                    {rankings.length > 0 ? (
+                      <RankingChart data={rankings} />
                     ) : (
                       <div className="h-96 flex items-center justify-center">
                         <LoadingSpinner size="lg" text="Loading ranking data..." />
@@ -153,23 +314,6 @@ export default function Dashboard() {
                     )}
                   </Suspense>
                 </Card>
-              </div>
-
-              {/* University Profile Section */}
-              <div className="mb-8">
-                <div className="mb-6">
-                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                    University Profile & Information
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Comprehensive details including history, academics, and contact information
-                  </p>
-                </div>
-                <ComprehensiveUniversityProfile
-                  university={university.data}
-                  currentRank={statistics.data?.currentRank}
-                  isLoading={university.loading}
-                />
               </div>
 
               {/* Secondary Content Grid */}
@@ -182,8 +326,8 @@ export default function Dashboard() {
                     </Card>
                   }
                 >
-                  {subjectRankings.data && (
-                    <SubjectRankingsCard rankings={subjectRankings.data} isLoading={subjectRankings.loading} />
+                  {subjectRankings.length > 0 && (
+                    <SubjectRankingsCard rankings={subjectRankings} />
                   )}
                 </Suspense>
 
@@ -195,16 +339,44 @@ export default function Dashboard() {
                     </Card>
                   }
                 >
-                  {achievements.data && (
-                    <AchievementsSection achievements={achievements.data} isLoading={achievements.loading} />
+                  {achievements.length > 0 && (
+                    <AchievementsSection achievements={achievements} />
                   )}
                 </Suspense>
+              </div>
+
+              {/* University Profile Section - Moved to bottom */}
+              <div className="mb-8">
+                <div className="mb-6">
+                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                    University Profile & Information
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Comprehensive details including history, academics, and contact information
+                  </p>
+                </div>
+                {university.data && (
+                  <ComprehensiveUniversityProfile
+                    university={{
+                      ...university.data,
+                      logoUrl: typeof university.data.logoUrl === 'string' 
+                        ? university.data.logoUrl 
+                        : university.data.logoUrl?.src || '/placeholder.svg',
+                      rankings: {
+                        ...university.data.rankings,
+                        quebecRank: university.data.rankings?.quebecRank || 0
+                      }
+                    }}
+                    currentRank={selectedUniversity.rankings?.worldRank}
+                    isLoading={university.isLoading}
+                  />
+                )}
               </div>
             </>
           )}
 
           {/* Loading state when no university selected */}
-          {!selectedUniversity && universitiesList.loading && (
+          {!selectedUniversity && universitiesList.isLoading && (
             <div className="flex items-center justify-center py-20">
               <LoadingSpinner size="lg" text="Loading universities..." />
             </div>

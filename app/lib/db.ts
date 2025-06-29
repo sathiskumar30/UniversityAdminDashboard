@@ -3,6 +3,9 @@
 export interface University {
   id: number
   name: string
+  shortName: string
+  city: string
+  province: string
   country: string
   description: string
   logoUrl: string
@@ -15,6 +18,10 @@ export interface University {
   colors: {
     primary: string
     secondary: string
+  }
+  rankings: {
+    worldRank: number
+    nationalRank: number
   }
 }
 
@@ -36,11 +43,26 @@ export interface Achievement {
   icon: string
 }
 
+export interface Statistics {
+  currentRank: number
+  previousRank: number
+  rankChange: number
+  totalStudents: string
+  internationalStudents: string
+  researchOutput: string
+  facultyCount: string
+  acceptanceRate: string
+  graduationRate: string
+}
+
 // Rich dummy data
 export const universities: University[] = [
   {
     id: 1,
     name: "Université de Montréal",
+    shortName: "UdeM",
+    city: "Montreal",
+    province: "Quebec",
     country: "Canada",
     description:
       "The Université de Montréal is a French-language public research university in Montreal, Quebec, Canada. Renowned for its excellence in research and innovation, UdeM is one of Canada's leading comprehensive universities with a strong international reputation. The university excels in fields ranging from medicine and engineering to arts and social sciences.",
@@ -55,10 +77,17 @@ export const universities: University[] = [
       primary: "#0F4C75",
       secondary: "#3282B8",
     },
+    rankings: {
+      worldRank: 132,
+      nationalRank: 5,
+    },
   },
   {
     id: 2,
     name: "McGill University",
+    shortName: "McGill",
+    city: "Montreal",
+    province: "Quebec",
     country: "Canada",
     description:
       "McGill University is an English-language public research university located in Montreal, Quebec, Canada. Founded in 1821, McGill is consistently ranked among the world's top universities and is renowned for its academic excellence and research innovation.",
@@ -72,6 +101,10 @@ export const universities: University[] = [
     colors: {
       primary: "#ED1B2F",
       secondary: "#FFE5E5",
+    },
+    rankings: {
+      worldRank: 31,
+      nationalRank: 1,
     },
   },
 ]
@@ -126,7 +159,38 @@ export const achievements: Achievement[] = [
   },
 ]
 
+// Statistics data
+export const statisticsData: Record<number, Statistics> = {
+  1: {
+    currentRank: 132,
+    previousRank: 141,
+    rankChange: 9,
+    totalStudents: "67,000+",
+    internationalStudents: "12,000+",
+    researchOutput: "15,000+ publications",
+    facultyCount: "2,400+",
+    acceptanceRate: "45%",
+    graduationRate: "89%",
+  },
+  2: {
+    currentRank: 31,
+    previousRank: 27,
+    rankChange: -4,
+    totalStudents: "40,000+",
+    internationalStudents: "12,000+",
+    researchOutput: "12,000+ publications",
+    facultyCount: "1,800+",
+    acceptanceRate: "46%",
+    graduationRate: "92%",
+  },
+}
+
 // Mock database functions
+export const getUniversities = (): University[] => {
+  console.log("Getting all universities")
+  return universities
+}
+
 export const getUniversity = (id: number): University | null => {
   console.log("Getting university with id:", id)
   const university = universities.find((u) => u.id === id) || null
@@ -154,4 +218,11 @@ export const getOverallRankings = (universityId: number): Ranking[] => {
 
 export const getSubjectRankings = (universityId: number): Ranking[] => {
   return rankings.filter((r) => r.universityId === universityId && r.category !== "Overall")
+}
+
+export const getStatistics = (universityId: number): Statistics | null => {
+  console.log("Getting statistics for university id:", universityId)
+  const statistics = statisticsData[universityId] || null
+  console.log("Found statistics:", statistics)
+  return statistics
 }

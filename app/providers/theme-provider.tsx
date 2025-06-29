@@ -13,7 +13,7 @@ type ThemeProviderProps = {
 }
 
 type ThemeProviderState = {
-  theme: Theme
+  theme: Theme | string
   setTheme: (theme: Theme) => void
 }
 
@@ -30,20 +30,17 @@ export function ThemeProvider({
   storageKey = "ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => (sessionStorage?.getItem(storageKey) as Theme) || defaultTheme)
+
+  const [theme, setTheme] = useState(defaultTheme);
+  
+  useEffect(() => {
+    const sessionTheme = sessionStorage.getItem('ui-theme');
+    setTheme(sessionTheme as Theme);
+  }, [])
 
   useEffect(() => {
     const root = window.document.documentElement
-
     root.classList.remove("light", "dark")
-
-    // if (theme === "system") {
-    //   const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-
-    //   root.classList.add(systemTheme)
-    //   return
-    // }
-
     root.classList.add(theme)
   }, [theme])
 
