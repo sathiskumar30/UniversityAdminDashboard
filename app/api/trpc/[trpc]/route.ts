@@ -68,6 +68,22 @@ const appRouter = t.router({
       }
     }
   }),
+
+  getAchievements: t.procedure.input(z.object({ universityId: z.number() })).query(({ input }) => {
+    return dbQueries.getAchievementsByUniversityId(input.universityId) || [];
+  }),
+
+  getStatistics: t.procedure.input(z.object({ universityId: z.number() })).query(({ input }) => {
+    return dbQueries.getStatisticsByUniversityId(input.universityId) || null;
+  }),
+
+  getRankings: t.procedure.input(z.object({ universityId: z.number() })).query(({ input }) => {
+    return dbQueries.getRankingsByUniversityId(input.universityId) || [];
+  }),
+
+  getSubjectRankings: t.procedure.input(z.object({ universityId: z.number() })).query(({ input }) => {
+    return dbQueries.getSubjectRankingsByUniversityId(input.universityId) || [];
+  }),
 })
 
 export type AppRouter = typeof appRouter

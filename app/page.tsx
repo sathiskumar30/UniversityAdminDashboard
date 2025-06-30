@@ -77,18 +77,6 @@ interface SubjectRanking {
 export default function Dashboard() {
   const [selectedUniversityId, setSelectedUniversityId] = useState<number>(1)
   const [selectedUniversity, setSelectedUniversity] = useState<University | null>(null)
-  const [achievements, setAchievements] = useState<Achievement[]>([])
-  const [statistics, setStatistics] = useState<StatisticsData | null>(null)
-  const [rankings, setRankings] = useState<RankingData[]>([])
-  const [subjectRankings, setSubjectRankings] = useState<SubjectRanking[]>([])
-  const [isLoadingAchievements, setIsLoadingAchievements] = useState(false)
-  const [isLoadingStatistics, setIsLoadingStatistics] = useState(false)
-  const [isLoadingRankings, setIsLoadingRankings] = useState(false)
-  const [isLoadingSubjectRankings, setIsLoadingSubjectRankings] = useState(false)
-  const [achievementsError, setAchievementsError] = useState<string | null>(null)
-  const [statisticsError, setStatisticsError] = useState<string | null>(null)
-  const [rankingsError, setRankingsError] = useState<string | null>(null)
-  const [subjectRankingsError, setSubjectRankingsError] = useState<string | null>(null)
 
   // tRPC queries with proper error handling and caching
   const universitiesList = trpc.getUniversities.useQuery()
@@ -100,70 +88,11 @@ export default function Dashboard() {
     }
   )
 
-  // Fetch achievements and statistics using regular GET requests
-  useEffect(() => {
-    if (selectedUniversityId) {
-      // Fetch achievements
-      setIsLoadingAchievements(true)
-      setAchievementsError(null)
-      fetch(`/api/achievements?universityId=${selectedUniversityId}`)
-        .then(res => res.json())
-        .then(data => {
-          setAchievements(data)
-          setIsLoadingAchievements(false)
-        })
-        .catch(error => {
-          console.error('Error fetching achievements:', error)
-          setAchievementsError('Failed to load achievements')
-          setIsLoadingAchievements(false)
-        })
-
-      // Fetch statistics
-      setIsLoadingStatistics(true)
-      setStatisticsError(null)
-      fetch(`/api/statistics?universityId=${selectedUniversityId}`)
-        .then(res => res.json())
-        .then(data => {
-          setStatistics(data)
-          setIsLoadingStatistics(false)
-        })
-        .catch(error => {
-          console.error('Error fetching statistics:', error)
-          setStatisticsError('Failed to load statistics')
-          setIsLoadingStatistics(false)
-        })
-
-      // Fetch rankings
-      setIsLoadingRankings(true)
-      setRankingsError(null)
-      fetch(`/api/rankings?universityId=${selectedUniversityId}`)
-        .then(res => res.json())
-        .then(data => {
-          setRankings(data)
-          setIsLoadingRankings(false)
-        })
-        .catch(error => {
-          console.error('Error fetching rankings:', error)
-          setRankingsError('Failed to load rankings')
-          setIsLoadingRankings(false)
-        })
-
-      // Fetch subject rankings
-      setIsLoadingSubjectRankings(true)
-      setSubjectRankingsError(null)
-      fetch(`/api/subject-rankings?universityId=${selectedUniversityId}`)
-        .then(res => res.json())
-        .then(data => {
-          setSubjectRankings(data)
-          setIsLoadingSubjectRankings(false)
-        })
-        .catch(error => {
-          console.error('Error fetching subject rankings:', error)
-          setSubjectRankingsError('Failed to load subject rankings')
-          setIsLoadingSubjectRankings(false)
-        })
-    }
-  }, [selectedUniversityId])
+  // New: tRPC queries for all data
+  const achievementsQuery = trpc.getAchievements.useQuery({ universityId: selectedUniversityId }, { enabled: !!selectedUniversityId })
+  const statisticsQuery = trpc.getStatistics.useQuery({ universityId: selectedUniversityId }, { enabled: !!selectedUniversityId })
+  const rankingsQuery = trpc.getRankings.useQuery({ universityId: selectedUniversityId }, { enabled: !!selectedUniversityId })
+  const subjectRankingsQuery = trpc.getSubjectRankings.useQuery({ universityId: selectedUniversityId }, { enabled: !!selectedUniversityId })
 
   // Update selected university when universities list loads
   useEffect(() => {
@@ -214,9 +143,9 @@ export default function Dashboard() {
     }
   })) || []
 
-  // Combined loading and error states
-  const isLoading = university.isLoading || isLoadingAchievements || isLoadingStatistics || isLoadingRankings || isLoadingSubjectRankings
-  const hasError = university.error || achievementsError || statisticsError || rankingsError || subjectRankingsError
+  // Update isLoading and hasError:
+  const isLoading = university.isLoading || achievementsQuery.isLoading || statisticsQuery.isLoading || rankingsQuery.isLoading || subjectRankingsQuery.isLoading
+  const hasError = university.error || achievementsQuery.error || statisticsQuery.error || rankingsQuery.error || subjectRankingsQuery.error
 
   if (hasError) {
     return (
@@ -226,7 +155,7 @@ export default function Dashboard() {
             <div className="text-center py-12">
               <h2 className="text-xl font-semibold text-red-600 dark:text-red-400 mb-2">Failed to Load Data</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                {university.error?.message || achievementsError || statisticsError || rankingsError || subjectRankingsError}
+                {university.error?.message || achievementsQuery.error?.message || statisticsQuery.error?.message || rankingsQuery.error?.message || subjectRankingsQuery.error?.message}
               </p>
               <Button
                 onClick={() => {
@@ -285,9 +214,9 @@ export default function Dashboard() {
               </div>
 
               {/* Modern Stats Grid */}
-              {statistics && (
+              {statisticsQuery.data && (
                 <div className="mb-6 sm:mb-8">
-                  <ModernStatsGrid data={statistics} isLoading={isLoadingStatistics} />
+                  <ModernStatsGrid data={statisticsQuery.data as StatisticsData} isLoading={statisticsQuery.isLoading} />
                 </div>
               )}
 
@@ -309,8 +238,8 @@ export default function Dashboard() {
                       </div>
                     }
                   >
-                    {rankings.length > 0 ? (
-                      <RankingChart data={rankings} />
+                    {rankingsQuery.data && rankingsQuery.data.length > 0 ? (
+                      <RankingChart data={rankingsQuery.data as RankingData[]} />
                     ) : (
                       <div className="h-64 sm:h-80 lg:h-96 flex items-center justify-center">
                         <LoadingSpinner size="lg" text="Loading ranking data..." />
@@ -330,8 +259,8 @@ export default function Dashboard() {
                     </Card>
                   }
                 >
-                  {subjectRankings.length > 0 && (
-                    <SubjectRankingsCard rankings={subjectRankings} />
+                  {subjectRankingsQuery.data && subjectRankingsQuery.data.length > 0 && (
+                    <SubjectRankingsCard rankings={subjectRankingsQuery.data as SubjectRanking[]} />
                   )}
                 </Suspense>
 
@@ -343,8 +272,8 @@ export default function Dashboard() {
                     </Card>
                   }
                 >
-                  {achievements.length > 0 && (
-                    <AchievementsSection achievements={achievements} />
+                  {achievementsQuery.data && (
+                    <AchievementsSection achievements={achievementsQuery.data as Achievement[]} />
                   )}
                 </Suspense>
               </div>

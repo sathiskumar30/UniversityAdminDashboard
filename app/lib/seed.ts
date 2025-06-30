@@ -463,5 +463,4 @@ console.log('✅ Statistics seeded successfully')
 
 // Close database connection
 db.close()
-
 console.log('🎉 Database seeding completed successfully!')

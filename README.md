@@ -1,17 +1,27 @@
-# University Rankings Dashboard 🎓
+# University Dashboard 🎓
 
-Hey there! This is a pretty cool dashboard I built for exploring university rankings and stuff. It's got interactive charts, real-time data (well, kinda real-time), and looks pretty modern. Built with Next.js 14, TypeScript, and tRPC because I'm a sucker for type safety.
+This project is a comprehensive University Dashboard. The dashboard provides an interactive and modern interface for exploring university rankings, institutional profiles, achievements, and key statistics. Built with Next.js, tRPC, and a modular component architecture, the application is designed for scalability, maintainability, and a seamless user experience across both desktop and mobile devices.
 
-![Dashboard Preview](https://img.shields.io/badge/Status-Live-brightgreen)
-![Next.js](https://img.shields.io/badge/Next.js-14-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
-![tRPC](https://img.shields.io/badge/tRPC-10.0-purple)
+## Preview
 
-## 🌟 Live Demo
+Here's how it looks (desktop light and two mobile dark screenshots):
 
-**Check it out here:** [University Rankings Dashboard](https://university-dashboard-final.vercel.app)
+<p align="center">
+  <img src="./public/desktop-light.png" alt="Desktop Light" height="240" style="margin-right: 8px; vertical-align: middle;" />
+  <img src="./public/mobile-dark-1.png" alt="Mobile Dark 1" height="240" style="margin-right: 8px; vertical-align: middle;" />
+  <img src="./public/mobile-dark-2.png" alt="Mobile Dark 2" height="240" style="vertical-align: middle;" />
+</p>
 
-*Note: The demo might take a few seconds to load, that's normal!*
+## About the Project
+
+The University Dashboard enables users to:
+- View and compare university rankings and performance trends
+- Explore detailed university profiles, including achievements and key facts
+- Access subject-specific rankings and institutional statistics
+- Experience a responsive, user-friendly interface with light and dark modes
+
+The project leverages type-safe APIs, modern React patterns, and a clean UI to deliver reliable and engaging data visualization for academic institutions.
+
 
 ## 📋 What's This About?
 
@@ -24,7 +34,7 @@ So I got tired of looking at boring university ranking tables and decided to bui
 - **Statistics** that actually make sense
 
 ### Universities Included
-- Université de Montréal (my hometown!)
+- Université de Montréal 
 - McGill University  
 - University of Toronto
 - University of British Columbia
@@ -34,11 +44,11 @@ So I got tired of looking at boring university ranking tables and decided to bui
 ## 🛠️ Tech Stuff I Used
 
 - **Frontend**: Next.js 14 (the new App Router is pretty sweet)
-- **Styling**: Tailwind CSS + Flowbite (because I'm lazy and don't want to write CSS)
-- **Charts**: Chart.js (the good old reliable one)
+- **Styling**: Tailwind CSS + Flowbite
+- **Charts**: Chart.js 
 - **API**: tRPC (type safety is life)
-- **State**: TanStack Query (React Query - it's awesome)
-- **Deployment**: Vercel (because it's just so easy)
+- **State**: TanStack Query 
+- **Deployment**: Vercel 
 
 ## 🚀 Getting Started
 
@@ -91,30 +101,31 @@ Go to [http://localhost:3000](http://localhost:3000) and you should see the magi
 
 The project works fine without any env vars since we're using static data. But if you want to add real APIs later, create a `.env.local`:
 
-```env
-# Optional - for when you want to connect to real APIs
-NEXT_PUBLIC_API_URL=http://localhost:3000/api
-```
-
 ## 📁 Project Structure
 
-```
+<pre>
 university-dashboard-final/
-├── app/
-│   ├── api/
-│   │   ├── trpc/           # tRPC magic happens here
-│   │   ├── achievements/   # Achievement data
-│   │   ├── rankings/       # Ranking data
-│   │   ├── statistics/     # Stats data
-│   │   └── universities/   # University data
-│   ├── components/         # React components
-│   ├── lib/               # Utilities and data
-│   ├── providers/         # Context stuff
-│   └── page.tsx           # Main page
-├── components/            # Shared UI stuff
-├── public/               # Images and logos
-└── styles/               # Global styles
-```
+├── app/                # Main Next.js app directory
+│   ├── api/            # API routes (tRPC)
+│   │   └── trpc/       # tRPC routers
+│   │       ├── route.ts
+│   │       └── [trpc]/ # Dynamic tRPC handlers
+│   │           └── route.ts
+│   ├── components/     # App-specific React components
+│   ├── lib/            # Server-side utilities, DB, and logic
+│   ├── providers/      # Context and theme providers
+│   ├── globals.css     # App-wide styles
+│   ├── layout.tsx      # Root layout
+│   └── page.tsx        # Main dashboard page
+├── components/
+│   └── ui/             # Shared UI components (buttons, cards, etc.)
+├── public/             # Static assets (images, icons)
+├── styles/             # Global styles (if any)
+├── database/           # SQLite database file
+├── README.md           # Project documentation
+├── package.json        # Project dependencies and scripts
+└── next.config.js      # Next.js configuration
+</pre>
 
 ## 🔧 Cool Features
 
@@ -142,23 +153,6 @@ university-dashboard-final/
 - Loading states (users like feedback)
 - Mobile responsive (obviously)
 
-## 🎨 Making It Your Own
-
-### Adding More Universities
-
-Want to add your alma mater? Update `app/lib/constants.ts`:
-
-```typescript
-export const UNIVERSITIES_DATA = [
-  // ... existing ones
-  {
-    id: 5,
-    name: "Your University",
-    shortName: "YU",
-    // ... fill in the rest
-  }
-]
-```
 
 ### Connecting to Real APIs
 
@@ -168,94 +162,6 @@ Right now it uses static data. To make it real:
 2. Modify tRPC stuff in `app/api/trpc/route.ts`
 3. Update the components to use real data
 
-## 🚀 Deploying This Thing
-
-### Vercel (Easiest Way)
-
-1. **Push to GitHub**
-```bash
-git add .
-git commit -m "Ready to deploy!"
-git push origin main
-```
-
-2. **Deploy on Vercel**
-- Go to [vercel.com](https://vercel.com)
-- Import your GitHub repo
-- Vercel figures out it's Next.js automatically
-- Boom! Live at `https://your-project.vercel.app`
-
-### Other Places
-
-You can deploy this anywhere that supports Next.js:
-- Netlify
-- Railway
-- DigitalOcean
-- AWS (if you're into that)
-
-## 🐛 When Things Go Wrong
-
-### Common Problems
-
-**1. Port 3000 is busy**
-```bash
-# Kill whatever's using port 3000
-npx kill-port 3000
-# Try again
-npm run dev
-```
-
-**2. TypeScript is being annoying**
-```bash
-# Clear the cache
-rm -rf .next
-npm run dev
-```
-
-**3. tRPC isn't working**
-- Make sure the dev server is running
-- Check browser console for errors
-- Look at `app/lib/trpc.ts` to see the endpoint
-
-### Performance Issues
-
-If it feels slow:
-- Development mode is always slower
-- Production builds are much faster
-- Check if you have too many browser tabs open (guilty!)
-
-## 🤝 Want to Help?
-
-Feel free to contribute! Here's how:
-
-1. Fork the repo
-2. Make a branch (`git checkout -b feature/something-cool`)
-3. Commit your changes (`git commit -m 'Added something cool'`)
-4. Push it (`git push origin feature/something-cool`)
-5. Make a Pull Request
-
-## 📝 Things I Want to Add Later
-
-- [ ] More universities (international ones too)
-- [ ] Real-time data updates
-- [ ] User accounts and favorites
-- [ ] Compare universities side by side
-- [ ] Export reports to PDF
-- [ ] Better search and filters
-- [ ] More chart types
-
-## 📄 License
-
-MIT License - do whatever you want with it!
-
-## 🙏 Shoutouts
-
-- Data from QS World University Rankings
-- Icons from Lucide React
-- Charts from Chart.js
-- UI components from Flowbite
-
----
 
 **Built with ❤️ and probably too much coffee**
 
