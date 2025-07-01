@@ -4,8 +4,6 @@ This project is a comprehensive University Dashboard. The dashboard provides an 
 
 ## Preview
 
-Here's how it looks (desktop light and two mobile dark screenshots):
-
 <p align="center">
   <img src="./public/Desktop-light.png" alt="Desktop Light" height="240" style="margin-right: 8px; vertical-align: middle;" />
   <img src="./public/mobile-dark-1.png" alt="Mobile Dark 1" height="240" style="margin-right: 8px; vertical-align: middle;" />
