@@ -49,7 +49,7 @@ So I got tired of looking at boring university ranking tables and decided to bui
 
 Make sure you have:
 - Node.js 18+ (I think 16+ might work too, but 18 is safer)
-- npm or pnpm (I used pnpm but npm works fine too)
+- npm or pnpm
 
 ### Let's Get This Running
 
