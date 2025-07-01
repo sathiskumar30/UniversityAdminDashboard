@@ -33,11 +33,6 @@ So I got tired of looking at boring university ranking tables and decided to bui
 - **Achievements** and cool stuff each uni has done
 - **Statistics** that actually make sense
 
-### Universities Included
-- Université de Montréal 
-- McGill University  
-- University of Toronto
-- University of British Columbia
 
 *Planning to add more soon, but these are the main Canadian ones for now.*
 
@@ -62,8 +57,8 @@ Make sure you have:
 
 1. **Clone it**
 ```bash
-git clone https://github.com/yourusername/university-dashboard-final.git
-cd university-dashboard-final
+git clone https://github.com/sathiskumar30/UniversityAdminDashboard.git
+cd UniversityAdminDashboard
 ```
 
 2. **Install stuff**
@@ -72,6 +67,16 @@ npm install
 # or if you're cool and use pnpm
 pnpm install
 ```
+
+> ⚠️ **Installation Issue?**
+> 
+> If you encounter errors while installing node modules, run:
+> 
+> ```bash
+> npm install --legacy-peer-deps
+> ```
+> 
+> This often resolves dependency conflicts during installation.
 
 3. **Seed the database (Important!)**
 ```bash
@@ -108,7 +113,6 @@ university-dashboard-final/
 ├── app/                # Main Next.js app directory
 │   ├── api/            # API routes (tRPC)
 │   │   └── trpc/       # tRPC routers
-│   │       ├── route.ts
 │   │       └── [trpc]/ # Dynamic tRPC handlers
 │   │           └── route.ts
 │   ├── components/     # App-specific React components

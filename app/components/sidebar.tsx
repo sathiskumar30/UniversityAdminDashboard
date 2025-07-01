@@ -30,9 +30,9 @@ export function Sidebar({ children }: SidebarProps) {
         size="sm"
       >
         {isOpen ? (
-          <X className="h-4 w-4 text-gray-700 dark:text-gray-300" />
+          <X className="h-7 w-4 text-gray-700 dark:text-gray-300" />
         ) : (
-          <Menu className="h-4 w-4 text-gray-700 dark:text-gray-300" />
+          <Menu className="h-7 w-4 text-gray-700 dark:text-gray-300" />
         )}
       </Button>
 
